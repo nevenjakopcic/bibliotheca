@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd" objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+  <changeSet id="1635437569320-1-author" author="Neven Jakopčić">
+    <createTable tableName="author">
+      <column autoIncrement="true" name="id" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_author"/>
+      </column>
+      <column name="name" type="VARCHAR(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="description" type="VARCHAR(255)"/>
+    </createTable>
+
+    <addUniqueConstraint columnNames="name" constraintName="uc_author_name" tableName="author"/>
+  </changeSet>
+  <changeSet id="1635437569320-2-book" author="Neven Jakopčić">
+    <createTable tableName="book">
+      <column autoIncrement="true" name="id" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_book"/>
+      </column>
+      <column name="title" type="VARCHAR(500)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="genre_id" type="BIGINT"/>
+      <column name="author_id" type="BIGINT"/>
+      <column name="description" type="VARCHAR(255)"/>
+      <column name="publish_date" type="DATE"/>
+    </createTable>
+  </changeSet>
+  <changeSet id="1635437569320-3-book_reservation" author="Neven Jakopčić">
+    <createTable tableName="book_reservation">
+      <column autoIncrement="true" name="id" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_book_reservation"/>
+      </column>
+      <column name="book_id" type="BIGINT"/>
+      <column name="borrower_id" type="BIGINT"/>
+      <column name="borrowed_date" type="DATE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="due_date" type="DATE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="returned" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet id="1635437569320-4-genre" author="Neven Jakopčić">
+    <createTable tableName="genre">
+      <column autoIncrement="true" name="id" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_genre"/>
+      </column>
+      <column name="name" type="VARCHAR(50)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <addUniqueConstraint columnNames="name" constraintName="uc_genre_name" tableName="genre"/>
+  </changeSet>
+  <changeSet id="1635437569320-5-membership" author="Neven Jakopčić">
+    <createTable tableName="membership">
+      <column autoIncrement="true" name="id" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_membership"/>
+      </column>
+      <column name="date_created" type="DATE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="last_updated" type="DATE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="valid_until" type="DATE">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet id="1635437569320-6-person" author="Neven Jakopčić">
+    <createTable tableName="person">
+      <column autoIncrement="true" name="id" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_person"/>
+      </column>
+      <column name="username" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="password" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="email" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="membership_id" type="BIGINT"/>
+      <column name="role" type="INT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="disabled" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <addUniqueConstraint columnNames="username" constraintName="uc_person_username" tableName="person"/>
+
+    <addUniqueConstraint columnNames="email" constraintName="uc_person_email" tableName="person"/>
+  </changeSet>
+  <changeSet id="1635437569320-7-book-author-FK" author="Neven Jakopčić">
+    <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="book" constraintName="FK_BOOK_ON_AUTHOR" referencedColumnNames="id"
+      referencedTableName="author"/>
+  </changeSet>
+  <changeSet id="1635437569320-8-book-genre-FK" author="Neven Jakopčić">
+    <addForeignKeyConstraint baseColumnNames="genre_id" baseTableName="book" constraintName="FK_BOOK_ON_GENRE" referencedColumnNames="id"
+      referencedTableName="genre"/>
+  </changeSet>
+  <changeSet id="1635437569320-9-book_reservation-book-FK" author="Neven Jakopčić">
+    <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="book_reservation" constraintName="FK_BOOK_RESERVATION_ON_BOOK"
+      referencedColumnNames="id" referencedTableName="book"/>
+  </changeSet>
+  <changeSet id="1635437569320-10-book_reservation-person-FK" author="Neven Jakopčić">
+    <addForeignKeyConstraint baseColumnNames="borrower_id" baseTableName="book_reservation" constraintName="FK_BOOK_RESERVATION_ON_BORROWER"
+      referencedColumnNames="id" referencedTableName="person"/>
+  </changeSet>
+  <changeSet id="1635437569320-11-person-membership-FK" author="Neven Jakopčić">
+    <addForeignKeyConstraint baseColumnNames="membership_id" baseTableName="person" constraintName="FK_PERSON_ON_MEMBERSHIP"
+      referencedColumnNames="id" referencedTableName="membership"/>
+  </changeSet>
+
+</databaseChangeLog>
