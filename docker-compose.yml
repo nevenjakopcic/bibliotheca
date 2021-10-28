@@ -1,0 +1,37 @@
+version: '3.6'
+services:
+  bibliotheca-db:
+    image: postgres
+    container_name: bibliotheca-docker-db
+    environment:
+      POSTGRES_PASSWORD: bibliotheca
+      POSTGRES_USER: bibliotheca
+      POSTGRES_DB: bibliotheca
+    ports:
+      - target: 5432
+        published: 5432
+        protocol: tcp
+        mode: host
+    networks:
+      - api-db
+    expose:
+      - 5432
+
+  bibliotheca-api:
+    build:
+      context: ./bibliotheca-api
+#      target: bibliotheca
+    image: njakopcic/bibliotheca
+    container_name: bibliotheca-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - bibliotheca-db
+    networks:
+      - api-db
+    expose:
+      - 8080
+
+networks:
+  api-db:
+    driver: bridge
