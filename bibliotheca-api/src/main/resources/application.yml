@@ -9,3 +9,5 @@ spring:
       ddl-auto: none
     show-sql: true
     open-in-view: true
+  mvc:
+    log-request-details: true
