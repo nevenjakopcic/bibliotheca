@@ -8,10 +8,7 @@ services:
       POSTGRES_USER: bibliotheca
       POSTGRES_DB: bibliotheca
     ports:
-      - target: 5432
-        published: 5432
-        protocol: tcp
-        mode: host
+      - "5432:5432"
     networks:
       - api-db
     expose:
