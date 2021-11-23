@@ -2,7 +2,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
+**/node_modules
+**/dist
 /.jpb/
 
 ### IntelliJ IDEA ###
@@ -13,3 +14,9 @@ target/
 
 ### VS Code ###
 .vscode/
+
+### Log files ##
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
