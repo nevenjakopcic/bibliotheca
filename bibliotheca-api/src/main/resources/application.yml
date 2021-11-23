@@ -11,3 +11,5 @@ spring:
     open-in-view: true
   mvc:
     log-request-details: true
+hr.njakopcic.bibliotheca:
+  secret: bibliotheca-secret

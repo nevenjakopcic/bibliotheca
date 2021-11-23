@@ -7,7 +7,7 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd" objectQuotingSt
   <changeSet author="Neven Jakopčić"  id="1637339472-1-admin">
     <insert schemaName="public" tableName="person">
       <column  name="username" value="admin"/>
-      <column  name="password" value="pass"/>
+      <column  name="password" value="$2a$10$bMm.ry3PmnIAcYhhwtpWx.aub8YU1dPq84JRQXzCTOm3RqfJKQvO2"/>
       <column  name="email" value="admin@gmail.com"/>
       <column  name="role" value="2"/>
       <column  name="disabled" value="false"/>
@@ -16,7 +16,7 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd" objectQuotingSt
   <changeSet author="Neven Jakopčić"  id="1637339472-2-user">
     <insert schemaName="public" tableName="person">
       <column  name="username" value="user"/>
-      <column  name="password" value="pass"/>
+      <column  name="password" value="$2a$10$bMm.ry3PmnIAcYhhwtpWx.aub8YU1dPq84JRQXzCTOm3RqfJKQvO2"/>
       <column  name="email" value="user@gmail.com"/>
       <column  name="role" value="1"/>
       <column  name="disabled" value="false"/>

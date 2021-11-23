@@ -9,8 +9,8 @@ public class BookDtoMapper {
         return BookDto.builder()
             .id(source.getId())
             .title(source.getTitle())
-            .genre(GenreMapper.map(source.getGenre()))
-            .author(AuthorMapper.map(source.getAuthor()))
+            .genre(GenreDtoMapper.map(source.getGenre()))
+            .author(AuthorDtoMapper.map(source.getAuthor()))
             .description(source.getDescription())
             .publishDate(source.getPublishDate())
             .build();
