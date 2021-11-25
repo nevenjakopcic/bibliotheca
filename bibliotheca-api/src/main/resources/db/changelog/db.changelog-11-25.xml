@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+  <changeSet author="Neven Jakopčić" id="1637862651-1-sample-memberships">
+    <insert schemaName="public" tableName="membership">
+      <column name="id" value="3"/>
+      <column name="date_created" value="2021-11-25"/>
+      <column name="last_updated" value="2021-11-25"/>
+      <column name="valid_until" value="2021-12-25"/>
+    </insert>
+    <insert schemaName="public" tableName="membership">
+      <column name="id" value="4"/>
+      <column name="date_created" value="2021-11-25"/>
+      <column name="last_updated" value="2021-11-25"/>
+      <column name="valid_until" value="2021-12-25"/>
+    </insert>
+    <insert schemaName="public" tableName="membership">
+      <column name="id" value="5"/>
+      <column name="date_created" value="2021-11-25"/>
+      <column name="last_updated" value="2021-11-25"/>
+      <column name="valid_until" value="2021-12-25"/>
+    </insert>
+    <insert schemaName="public" tableName="membership">
+      <column name="id" value="6"/>
+      <column name="date_created" value="2021-11-25"/>
+      <column name="last_updated" value="2021-11-25"/>
+      <column name="valid_until" value="2021-12-25"/>
+    </insert>
+  </changeSet>
+  <changeSet author="Neven Jakopčić" id="1637862651-2-sample-users">
+    <insert schemaName="public" tableName="person">
+      <column name="username" value="neno"/>
+      <column name="password" value="$2a$10$bMm.ry3PmnIAcYhhwtpWx.aub8YU1dPq84JRQXzCTOm3RqfJKQvO2"/>
+      <column name="email" value="neno@gmail.com"/>
+      <column name="membership_id" value="3"/>
+      <column name="role" value="1"/>
+      <column name="disabled" value="false"/>
+    </insert>
+    <insert schemaName="public" tableName="person">
+      <column name="username" value="luka"/>
+      <column name="password" value="$2a$10$bMm.ry3PmnIAcYhhwtpWx.aub8YU1dPq84JRQXzCTOm3RqfJKQvO2"/>
+      <column name="email" value="luka@gmail.com"/>
+      <column name="membership_id" value="4"/>
+      <column name="role" value="1"/>
+      <column name="disabled" value="false"/>
+    </insert>
+    <insert schemaName="public" tableName="person">
+      <column name="username" value="jakov"/>
+      <column name="password" value="$2a$10$bMm.ry3PmnIAcYhhwtpWx.aub8YU1dPq84JRQXzCTOm3RqfJKQvO2"/>
+      <column name="email" value="jakov@gmail.com"/>
+      <column name="membership_id" value="5"/>
+      <column name="role" value="1"/>
+      <column name="disabled" value="false"/>
+    </insert>
+    <insert schemaName="public" tableName="person">
+      <column name="username" value="matija"/>
+      <column name="password" value="$2a$10$bMm.ry3PmnIAcYhhwtpWx.aub8YU1dPq84JRQXzCTOm3RqfJKQvO2"/>
+      <column name="email" value="matija@gmail.com"/>
+      <column name="membership_id" value="6"/>
+      <column name="role" value="1"/>
+      <column name="disabled" value="false"/>
+    </insert>
+  </changeSet>
+</databaseChangeLog>
