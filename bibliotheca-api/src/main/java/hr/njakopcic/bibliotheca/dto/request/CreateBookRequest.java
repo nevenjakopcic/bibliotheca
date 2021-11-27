@@ -25,7 +25,4 @@ public class CreateBookRequest {
 
     @NotBlank
     private String description;
-
-    @NotNull
-    private LocalDate publishDate;
 }

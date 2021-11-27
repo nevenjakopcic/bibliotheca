@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+  <changeSet author="Neven Jakopčić" id="1638034938-1-genres">
+    <insert schemaName="public" tableName="genre">
+      <column name="id" value="1"/>
+      <column name="name" value="classics"/>
+    </insert>
+    <insert schemaName="public" tableName="genre">
+      <column name="id" value="2"/>
+      <column name="name" value="philosophy"/>
+    </insert>
+    <insert schemaName="public" tableName="genre">
+      <column name="id" value="3"/>
+      <column name="name" value="thriller"/>
+    </insert>
+    <insert schemaName="public" tableName="genre">
+      <column name="id" value="4"/>
+      <column name="name" value="psychology"/>
+    </insert>
+  </changeSet>
+
+  <changeSet author="Neven Jakopčić" id="1638034938-2-authors">
+    <insert schemaName="public" tableName="author">
+      <column name="id" value="1"/>
+      <column name="name" value="Thomas Hobbes"/>
+    </insert>
+    <insert schemaName="public" tableName="author">
+      <column name="id" value="2"/>
+      <column name="name" value="St. Augustine"/>
+    </insert>
+    <insert schemaName="public" tableName="author">
+      <column name="id" value="3"/>
+      <column name="name" value="Bret Easton Ellis"/>
+    </insert>
+    <insert schemaName="public" tableName="author">
+      <column name="id" value="4"/>
+      <column name="name" value="Jane Austen"/>
+    </insert>
+    <insert schemaName="public" tableName="author">
+      <column name="id" value="5"/>
+      <column name="name" value="Carl Jung"/>
+    </insert>
+    <insert schemaName="public" tableName="author">
+      <column name="id" value="6"/>
+      <column name="name" value="Plato"/>
+    </insert>
+    <insert schemaName="public" tableName="author">
+      <column name="id" value="7"/>
+      <column name="name" value="J. D. Salinger"/>
+    </insert>
+    <insert schemaName="public" tableName="author">
+      <column name="id" value="8"/>
+      <column name="name" value="F. Scott Fitzgerald"/>
+    </insert>
+  </changeSet>
+
+  <changeSet author="Neven Jakopčić" id="1638034938-3-books">
+    <insert schemaName="public" tableName="book">
+      <column name="id" value="1"/>
+      <column name="title">Leviathan</column>
+      <column name="genre_id" value="2"/>
+      <column name="author_id" value="1"/>
+      <column name="description">
+        Written during the chaos of the English Civil War, Thomas Hobbes' Leviathan asks how, in a world of violence and horror,
+can we stop ourselves from descending into anarchy? Hobbes' case for a 'common-wealth' under a powerful
+sovereign - or 'Leviathan' - to enforce security and the rule of law, shocked his contemporaries, and his book was publicly burnt
+for sedition the moment it was published. But his penetrating work of political philosophy - now fully revised and with
+a new introduction for this edition - opened up questions about the nature of statecraft and society that influenced governments
+across the world.
+      </column>
+    </insert>
+    <insert schemaName="public" tableName="book">
+      <column name="id" value="2"/>
+      <column name="title">Confessions</column>
+      <column name="genre_id" value="2"/>
+      <column name="author_id" value="2"/>
+      <column name="description">
+        The Confessions is a spiritual autobiography, covering the first 35 years of Augustine's life,
+with particular emphasis on Augustine's spiritual development and how he accepted Christianity. The Confessions is divided into 13 books.
+Books 1 through 9 contain Augustine's life story. Book 10 is an exploration of memory. Books 11 through 13 are detailed interpretations
+of the first chapter of Genesis, which describes the creation of the world.
+      </column>
+    </insert>
+    <insert schemaName="public" tableName="book">
+      <column name="id" value="3"/>
+      <column name="title">American Psycho</column>
+      <column name="genre_id" value="3"/>
+      <column name="author_id" value="3"/>
+      <column name="description">
+        Patrick Bateman is twenty-six and he works on Wall Street, he is handsome, sophisticated, charming and intelligent.
+He is also a psychopath. Taking us to head-on collision with America's greatest dream—and its worst nightmare—American Psycho is bleak,
+bitter, black comedy about a world we all recognise but do not wish to confront.
+      </column>
+    </insert>
+    <insert schemaName="public" tableName="book">
+      <column name="id" value="4"/>
+      <column name="title">Pride and Prejudice</column>
+      <column name="genre_id" value="1"/>
+      <column name="author_id" value="4"/>
+      <column name="description">
+        Since its immediate success in 1813, Pride and Prejudice has remained one of the most popular novels in the English language.
+Jane Austen called this brilliant work "her own darling child" and its vivacious heroine, Elizabeth Bennet,
+"as delightful a creature as ever appeared in print." The romantic clash between the opinionated Elizabeth and her proud beau, Mr. Darcy,
+is a splendid performance of civilized sparring. And Jane Austen's radiant wit sparkles as her characters dance a delicate quadrille of
+flirtation and intrigue, making this book the most superb comedy of manners of Regency England.
+      </column>
+    </insert>
+    <insert schemaName="public" tableName="book">
+      <column name="id" value="5"/>
+      <column name="title">Man and His Symbols</column>
+      <column name="genre_id" value="4"/>
+      <column name="author_id" value="5"/>
+      <column name="description">
+        Man and His Symbols owes its existence to one of Jung's own dreams. The great psychologist dreamed that his work was understood by
+a wide public, rather than just by psychiatrists, and therefore he agreed to write and edit this fascinating book. Here, Jung examines the
+full world of the unconscious, whose language he believed to be the symbols constantly revealed in dreams. Convinced that dreams offer
+practical advice, sent from the unconscious to the conscious self, Jung felt that self-understanding would lead to a full
+and productive life. Thus, the reader will gain new insights into himself from this thoughtful volume, which also illustrates
+symbols throughout history. Completed just before his death by Jung and his associates, it is clearly addressed to the general reader.
+      </column>
+    </insert>
+    <insert schemaName="public" tableName="book">
+      <column name="id" value="6"/>
+      <column name="title">Modern Man in Search of a Soul</column>
+      <column name="genre_id" value="4"/>
+      <column name="author_id" value="5"/>
+      <column name="description">
+        Considered by many to be one of the most important books in the field of psychology, Modern Man in Search of a Soul is a
+comprehensive introduction to the thought of Carl Gustav Jung. In this book, Jung examines some of the most contested and crucial areas
+in the field of analytical psychology, including dream analysis, the primitive unconscious, and the relationship between psychology
+and religion. Additionally, Jung looks at the differences between his theories and those of Sigmund Freud, providing a valuable basis
+for anyone interested in the fundamentals of psychoanalysis.
+      </column>
+    </insert>
+    <insert schemaName="public" tableName="book">
+      <column name="id" value="7"/>
+      <column name="title">The Republic</column>
+      <column name="genre_id" value="2"/>
+      <column name="author_id" value="6"/>
+      <column name="description">
+        Presented in the form of a dialogue between Socrates and three different interlocutors, this classic text is an enquiry into
+the notion of a perfect community and the ideal individual within it. During the conversation, other questions are raised:
+what is goodness?; what is reality?; and what is knowledge? The Republic also addresses the purpose of education and the role of both
+women and men as guardians of the people. With remarkable lucidity and deft use of allegory, Plato arrives at a depiction of
+a state bound by harmony and ruled by philosopher kings.
+      </column>
+    </insert>
+    <insert schemaName="public" tableName="book">
+      <column name="id" value="8"/>
+      <column name="title">Catcher in the Rye</column>
+      <column name="genre_id" value="1"/>
+      <column name="author_id" value="7"/>
+      <column name="description">
+        The hero-narrator of The Catcher in the Rye is an ancient child of sixteen, a native New Yorker named Holden Caulfield.
+Through circumstances that tend to preclude adult, secondhand description, he leaves his prep school in Pennsylvania and goes
+underground in New York City for three days. The boy himself is at once too simple and too complex for us to make any final comment
+about him or his story. Perhaps the safest thing we can say about Holden is that he was born in the world not just strongly attracted to
+beauty but, almost, hopelessly impaled on it. There are many voices in this novel: children's voices, adult voices,
+underground voices-but Holden's voice is the most eloquent of all. Transcending his own vernacular, yet remaining marvelously
+faithful to it, he issues a perfectly articulated cry of mixed pain and pleasure. However, like most lovers and clowns and poets of the
+higher orders, he keeps most of the pain to, and for, himself. The pleasure he gives away, or sets aside, with all his heart.
+It is there for the reader who can handle it to keep.
+      </column>
+    </insert>
+    <insert schemaName="public" tableName="book">
+      <column name="id" value="9"/>
+      <column name="title">The Great Gatsby</column>
+      <column name="genre_id" value="1"/>
+      <column name="author_id" value="8"/>
+      <column name="description">
+        The Great Gatsby, F. Scott Fitzgerald's third book, stands as the supreme achievement of his career.
+This exemplary novel of the Jazz Age has been acclaimed by generations of readers. The story is of the fabulously wealthy Jay Gatsby
+and his new love for the beautiful Daisy Buchanan, of lavish parties on Long Island at a time when The New York Times noted
+"gin was the national drink and sex the national obsession," it is an exquisitely crafted tale of America in the 1920s.
+The Great Gatsby is one of the great classics of twentieth-century literature.
+      </column>
+    </insert>
+  </changeSet>
+
+  <changeSet author="Neven Jakopčić" id="1638034938-4-book-reservations">
+    <insert schemaName="public" tableName="book_reservation">
+      <column name="id" value="1"/>
+      <column name="book_id" value="1"/>
+      <column name="borrower_id" value="2"/>
+      <column name="borrowed_date" value="2021-11-25"/>
+      <column name="due_date" value="2021-12-09"/>
+      <column name="returned" value="true"/>
+    </insert>
+    <insert schemaName="public" tableName="book_reservation">
+      <column name="id" value="2"/>
+      <column name="book_id" value="1"/>
+      <column name="borrower_id" value="3"/>
+      <column name="borrowed_date" value="2021-11-27"/>
+      <column name="due_date" value="2021-12-11"/>
+      <column name="returned" value="false"/>
+    </insert>
+    <insert schemaName="public" tableName="book_reservation">
+      <column name="id" value="3"/>
+      <column name="book_id" value="2"/>
+      <column name="borrower_id" value="2"/>
+      <column name="borrowed_date" value="2021-11-25"/>
+      <column name="due_date" value="2021-12-09"/>
+      <column name="returned" value="true"/>
+    </insert>
+  </changeSet>
+</databaseChangeLog>

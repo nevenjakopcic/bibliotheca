@@ -12,7 +12,6 @@ public class BookDtoMapper {
             .genre(GenreDtoMapper.map(source.getGenre()))
             .author(AuthorDtoMapper.map(source.getAuthor()))
             .description(source.getDescription())
-            .publishDate(source.getPublishDate())
             .build();
     }
 

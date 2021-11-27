@@ -9,7 +9,6 @@ public class AuthorDtoMapper {
         return AuthorDto.builder()
             .id(source.getId())
             .name(source.getName())
-            .description(source.getDescription())
             .build();
     }
 

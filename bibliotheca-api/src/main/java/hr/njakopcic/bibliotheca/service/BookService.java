@@ -42,7 +42,6 @@ public class BookService {
             .author(authorRepository.findById(request.getAuthorId())
                 .orElseThrow(() -> new NotFoundException(String.format("Author with id %d not found.", request.getAuthorId()))))
             .description(request.getDescription())
-            .publishDate(request.getPublishDate())
             .build();
 
         book = bookRepository.save(book);

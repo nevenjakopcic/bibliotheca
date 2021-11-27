@@ -40,7 +40,4 @@ public class Book {
 
     @Column(name = "DESCRIPTION")
     private String description;
-
-    @Column(name = "PUBLISH_DATE")
-    private LocalDate publishDate;
 }
