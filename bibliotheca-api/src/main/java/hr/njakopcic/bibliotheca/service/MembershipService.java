@@ -5,6 +5,7 @@ import hr.njakopcic.bibliotheca.mapper.MembershipDtoMapper;
 import hr.njakopcic.bibliotheca.model.Membership;
 import hr.njakopcic.bibliotheca.repository.MembershipRepository;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,11 @@ public class MembershipService {
         updatedMembership = membershipRepository.save(updatedMembership);
 
         return MembershipDtoMapper.map(updatedMembership);
+    }
+
+    public boolean isMembershipActive(Long userId) {
+        Membership membership = membershipRepository.findByUserId(userId);
+
+        return LocalDate.now().isBefore(membership.getValidUntil().plusDays(1));
     }
 }

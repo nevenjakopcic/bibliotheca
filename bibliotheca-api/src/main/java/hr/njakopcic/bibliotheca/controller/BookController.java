@@ -37,4 +37,9 @@ public class BookController {
     public ResponseEntity<ApiResponse> createBook(@Valid @RequestBody final CreateBookRequest request) {
         return new ResponseEntity<>(new ApiResponse(bookService.createBook(request)), HttpStatus.CREATED);
     }
+
+    @PostMapping("/borrow/{bookId}")
+    public ResponseEntity<ApiResponse> borrowBook(@PathVariable final Long bookId) {
+        return new ResponseEntity<>(new ApiResponse(bookService.borrowBook(bookId)), HttpStatus.OK);
+    }
 }

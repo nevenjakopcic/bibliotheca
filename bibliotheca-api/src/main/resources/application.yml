@@ -13,3 +13,4 @@ spring:
     log-request-details: true
 hr.njakopcic.bibliotheca:
   secret: bibliotheca-secret
+debug: true

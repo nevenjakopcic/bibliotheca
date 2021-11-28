@@ -1,28 +1,69 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <template v-if="shouldShowUi">
+      <drawer @show-snackbar="showSnackbar" v-model="drawer" />
+      <app-bar @toggle-drawer="drawer = !drawer" />
+    </template>
+    <v-main :class="{ 'grey lighten-3': !shouldShowUi, 'mx-10': drawer && $vuetify.breakpoint.mdAndUp }">
+      <v-container :class="{ 'pa-0 ma-0': !shouldShowUi }">
+        <router-view @show-snackbar="showSnackbar" />
+      </v-container>
+    </v-main>
+    <v-snackbar
+        app
+        timeout="2000"
+        v-model="snackbar"
+        bottom
+        :color="snackbarColor"
+        content-class="text-center"
+        rounded="lg"
+    >
+      {{ snackbarMessage }}
+    </v-snackbar>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Drawer from "./components/Drawer";
+import AppBar from "./components/AppBar";
+import RouteNames from "./router/routeNames";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Drawer,
+    AppBar
+  },
+  methods: {
+    showSnackbar(data) {
+      this.snackbarMessage = data.message;
+      this.snackbarColor = data.color;
+      this.snackbar = true;
+    },
+    updatePreferences() {
+      if (this.shouldShowUi) {
+        this.$vuetify.lang.current = this.locale.toLowerCase();
+      }
+    }
+  },
+  created() {
+    this.updatePreferences();
+  },
+  updated() {
+    this.updatePreferences();
+  },
+  computed: {
+    shouldShowUi() {
+      return ![RouteNames.LOGIN, RouteNames.REGISTER].includes(
+          this.$route.name
+      );
+    }
+  },
+  data: () => ({
+    drawer: false,
+    snackbar: false,
+    snackbarMessage: "",
+    snackbarColor: "primary"
+  })
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

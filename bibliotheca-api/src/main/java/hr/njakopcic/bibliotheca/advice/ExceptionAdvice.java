@@ -1,7 +1,9 @@
 package hr.njakopcic.bibliotheca.advice;
 
 import hr.njakopcic.bibliotheca.dto.ApiResponse;
+import hr.njakopcic.bibliotheca.exception.BookAlreadyBorrowedException;
 import hr.njakopcic.bibliotheca.exception.EmailAlreadyTakenException;
+import hr.njakopcic.bibliotheca.exception.MembershipExpiredException;
 import hr.njakopcic.bibliotheca.exception.NotFoundException;
 import hr.njakopcic.bibliotheca.exception.UsernameAlreadyTakenException;
 import java.nio.file.AccessDeniedException;
@@ -36,7 +38,9 @@ public class ExceptionAdvice {
     }
 
     @ExceptionHandler({UsernameAlreadyTakenException.class,
-                        EmailAlreadyTakenException.class})
+                        EmailAlreadyTakenException.class,
+                        MembershipExpiredException.class,
+                        BookAlreadyBorrowedException.class})
     public ResponseEntity<ApiResponse> handleBadRequestException(RuntimeException e) {
         return new ResponseEntity<>(new ApiResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }

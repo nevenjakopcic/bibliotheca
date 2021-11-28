@@ -25,10 +25,24 @@ services:
     depends_on:
       - bibliotheca-db
     networks:
+      - ui-api
       - api-db
     expose:
       - 8080
 
+  bibliotheca-ui:
+    build: ./bibliotheca-ui
+    image: njakopcic/bibliotheca-ui
+    container_name: bibliotheca-ui
+    ports:
+      - "8081:8081"
+    depends_on:
+      - bibliotheca-api
+    networks:
+      - ui-api
+
 networks:
   api-db:
+    driver: bridge
+  ui-api:
     driver: bridge
