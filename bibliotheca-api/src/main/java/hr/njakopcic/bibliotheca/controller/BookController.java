@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -24,8 +25,9 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public ResponseEntity<ApiResponse> getAllBooks() {
-        return new ResponseEntity<>(new ApiResponse(bookService.getAllBooks()), HttpStatus.OK);
+    public ResponseEntity<ApiResponse> getAllBooks(@RequestParam(required = false) final String title,
+                                                   @RequestParam(required = false) final Long genre) {
+        return new ResponseEntity<>(new ApiResponse(bookService.getAllBooks(title, genre)), HttpStatus.OK);
     }
 
     @GetMapping("/genres")
@@ -58,5 +60,11 @@ public class BookController {
     @PostMapping("/borrow/{bookId}")
     public ResponseEntity<ApiResponse> borrowBook(@PathVariable final Long bookId) {
         return new ResponseEntity<>(new ApiResponse(bookService.borrowBook(bookId)), HttpStatus.OK);
+    }
+
+    @PostMapping("/return/{bookId}")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<ApiResponse> returnBook(@PathVariable final Long bookId) {
+        return new ResponseEntity<>(new ApiResponse(bookService.returnBook(bookId)), HttpStatus.OK);
     }
 }

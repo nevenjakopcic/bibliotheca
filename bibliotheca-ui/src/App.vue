@@ -39,18 +39,7 @@ export default {
       this.snackbarMessage = data.message;
       this.snackbarColor = data.color;
       this.snackbar = true;
-    },
-    updatePreferences() {
-      if (this.shouldShowUi) {
-        this.$vuetify.lang.current = this.locale.toLowerCase();
-      }
     }
-  },
-  created() {
-    this.updatePreferences();
-  },
-  updated() {
-    this.updatePreferences();
   },
   computed: {
     shouldShowUi() {

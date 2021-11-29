@@ -6,61 +6,48 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
   <changeSet author="Neven Jakopčić" id="1638034938-1-genres">
     <insert schemaName="public" tableName="genre">
-      <column name="id" value="1"/>
       <column name="name" value="classics"/>
     </insert>
     <insert schemaName="public" tableName="genre">
-      <column name="id" value="2"/>
       <column name="name" value="philosophy"/>
     </insert>
     <insert schemaName="public" tableName="genre">
-      <column name="id" value="3"/>
       <column name="name" value="thriller"/>
     </insert>
     <insert schemaName="public" tableName="genre">
-      <column name="id" value="4"/>
       <column name="name" value="psychology"/>
     </insert>
   </changeSet>
 
   <changeSet author="Neven Jakopčić" id="1638034938-2-authors">
     <insert schemaName="public" tableName="author">
-      <column name="id" value="1"/>
       <column name="name" value="Thomas Hobbes"/>
     </insert>
     <insert schemaName="public" tableName="author">
-      <column name="id" value="2"/>
       <column name="name" value="St. Augustine"/>
     </insert>
     <insert schemaName="public" tableName="author">
-      <column name="id" value="3"/>
       <column name="name" value="Bret Easton Ellis"/>
     </insert>
     <insert schemaName="public" tableName="author">
-      <column name="id" value="4"/>
       <column name="name" value="Jane Austen"/>
     </insert>
     <insert schemaName="public" tableName="author">
-      <column name="id" value="5"/>
       <column name="name" value="Carl Jung"/>
     </insert>
     <insert schemaName="public" tableName="author">
-      <column name="id" value="6"/>
       <column name="name" value="Plato"/>
     </insert>
     <insert schemaName="public" tableName="author">
-      <column name="id" value="7"/>
       <column name="name" value="J. D. Salinger"/>
     </insert>
     <insert schemaName="public" tableName="author">
-      <column name="id" value="8"/>
       <column name="name" value="F. Scott Fitzgerald"/>
     </insert>
   </changeSet>
 
   <changeSet author="Neven Jakopčić" id="1638034938-3-books">
     <insert schemaName="public" tableName="book">
-      <column name="id" value="1"/>
       <column name="title">Leviathan</column>
       <column name="genre_id" value="2"/>
       <column name="author_id" value="1"/>
@@ -74,7 +61,6 @@ across the world.
       </column>
     </insert>
     <insert schemaName="public" tableName="book">
-      <column name="id" value="2"/>
       <column name="title">Confessions</column>
       <column name="genre_id" value="2"/>
       <column name="author_id" value="2"/>
@@ -86,7 +72,6 @@ of the first chapter of Genesis, which describes the creation of the world.
       </column>
     </insert>
     <insert schemaName="public" tableName="book">
-      <column name="id" value="3"/>
       <column name="title">American Psycho</column>
       <column name="genre_id" value="3"/>
       <column name="author_id" value="3"/>
@@ -97,7 +82,6 @@ bitter, black comedy about a world we all recognise but do not wish to confront.
       </column>
     </insert>
     <insert schemaName="public" tableName="book">
-      <column name="id" value="4"/>
       <column name="title">Pride and Prejudice</column>
       <column name="genre_id" value="1"/>
       <column name="author_id" value="4"/>
@@ -110,7 +94,6 @@ flirtation and intrigue, making this book the most superb comedy of manners of R
       </column>
     </insert>
     <insert schemaName="public" tableName="book">
-      <column name="id" value="5"/>
       <column name="title">Man and His Symbols</column>
       <column name="genre_id" value="4"/>
       <column name="author_id" value="5"/>
@@ -124,7 +107,6 @@ symbols throughout history. Completed just before his death by Jung and his asso
       </column>
     </insert>
     <insert schemaName="public" tableName="book">
-      <column name="id" value="6"/>
       <column name="title">Modern Man in Search of a Soul</column>
       <column name="genre_id" value="4"/>
       <column name="author_id" value="5"/>
@@ -137,7 +119,6 @@ for anyone interested in the fundamentals of psychoanalysis.
       </column>
     </insert>
     <insert schemaName="public" tableName="book">
-      <column name="id" value="7"/>
       <column name="title">The Republic</column>
       <column name="genre_id" value="2"/>
       <column name="author_id" value="6"/>
@@ -150,7 +131,6 @@ a state bound by harmony and ruled by philosopher kings.
       </column>
     </insert>
     <insert schemaName="public" tableName="book">
-      <column name="id" value="8"/>
       <column name="title">Catcher in the Rye</column>
       <column name="genre_id" value="1"/>
       <column name="author_id" value="7"/>
@@ -167,7 +147,6 @@ It is there for the reader who can handle it to keep.
       </column>
     </insert>
     <insert schemaName="public" tableName="book">
-      <column name="id" value="9"/>
       <column name="title">The Great Gatsby</column>
       <column name="genre_id" value="1"/>
       <column name="author_id" value="8"/>

@@ -22,6 +22,6 @@ export default {
 	},
 	getters: {
 		user: state => state.user,
-		isAdmin: state => state.user.role == AUTH_ROLE.ROLE_ADMIN
+		isAdmin: state => state.user.role === AUTH_ROLE.ROLE_ADMIN
 	},
 }

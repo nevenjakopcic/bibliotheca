@@ -6,13 +6,11 @@
 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd" objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
   <changeSet author="Neven Jakopčić" id="1637339472-1-admin-user-memberships">
     <insert schemaName="public" tableName="membership">
-      <column name="id" value="1"/>
       <column name="date_created" value="2021-11-19"/>
       <column name="last_updated" value="2021-11-19"/>
       <column name="valid_until" value="2021-12-19"/>
     </insert>
     <insert schemaName="public" tableName="membership">
-      <column name="id" value="2"/>
       <column name="date_created" value="2021-11-19"/>
       <column name="last_updated" value="2021-11-19"/>
       <column name="valid_until" value="2021-12-19"/>

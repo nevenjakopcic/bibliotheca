@@ -19,18 +19,19 @@ export default {
   },
   getters: {
     memberships: state => state.memberships,
-    validMembership: state => {
-      if (store.getters.user.role == AUTH_ROLE.ROLE_ADMIN) {
-        return true;
-      } else {
-        if (state.memberships && state.memberships.length !== 0) {
-          return isBefore(
-            new Date(),
-            add(new Date(), { months: 1 })
-          );
-        }
-        return false;
-      }
+    validMembership: () => {
+      // if (store.getters.user.role === AUTH_ROLE.ROLE_ADMIN) {
+      //   return true;
+      // } else {
+      //   if (state.memberships && state.memberships.length !== 0) {
+      //     return isBefore(
+      //       new Date(),
+      //       add(new Date(), { months: 1 })
+      //     );
+      //   }
+      //   return false;
+      // }
+      return true;
     }
   },
 }

@@ -6,25 +6,21 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
   <changeSet author="Neven Jakopčić" id="1637862651-1-sample-memberships">
     <insert schemaName="public" tableName="membership">
-      <column name="id" value="3"/>
       <column name="date_created" value="2021-11-25"/>
       <column name="last_updated" value="2021-11-25"/>
       <column name="valid_until" value="2021-12-25"/>
     </insert>
     <insert schemaName="public" tableName="membership">
-      <column name="id" value="4"/>
       <column name="date_created" value="2021-11-25"/>
       <column name="last_updated" value="2021-11-25"/>
       <column name="valid_until" value="2021-12-25"/>
     </insert>
     <insert schemaName="public" tableName="membership">
-      <column name="id" value="5"/>
       <column name="date_created" value="2021-11-25"/>
       <column name="last_updated" value="2021-11-25"/>
       <column name="valid_until" value="2021-12-25"/>
     </insert>
     <insert schemaName="public" tableName="membership">
-      <column name="id" value="6"/>
       <column name="date_created" value="2021-11-25"/>
       <column name="last_updated" value="2021-11-25"/>
       <column name="valid_until" value="2021-12-25"/>

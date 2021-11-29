@@ -41,8 +41,8 @@ public class BookService {
     private final CurrentUserService currentUserService;
     private final MembershipService membershipService;
 
-    public List<BookDto> getAllBooks() {
-        return bookRepository.findAll().stream()
+    public List<BookDto> getAllBooks(String title, Long genreId) {
+        return bookRepository.findAll(title, genreId).stream()
                                        .map((Book source) -> BookDtoMapper.map(source, reservationRepository.findUnreturnedReservationId(source.getId())))
                                        .collect(Collectors.toList());
     }
@@ -117,6 +117,16 @@ public class BookService {
             .returned(false)
             .build();
 
+        reservation = reservationRepository.save(reservation);
+
+        return ReservationDtoMapper.map(reservation);
+    }
+
+    public ReservationDto returnBook(Long bookId) {
+
+        Reservation reservation = reservationRepository.findLatestReservation(bookId);
+
+        reservation.setReturned(true);
         reservation = reservationRepository.save(reservation);
 
         return ReservationDtoMapper.map(reservation);
