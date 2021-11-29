@@ -19,4 +19,5 @@ public class BookDto implements Serializable {
     private GenreDto genre;
     private AuthorDto author;
     private String description;
+    private Long reservationId;
 }

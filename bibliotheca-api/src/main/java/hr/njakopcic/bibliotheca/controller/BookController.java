@@ -2,6 +2,7 @@ package hr.njakopcic.bibliotheca.controller;
 
 import hr.njakopcic.bibliotheca.dto.ApiResponse;
 import hr.njakopcic.bibliotheca.dto.request.CreateBookRequest;
+import hr.njakopcic.bibliotheca.dto.request.CreateGenreRequest;
 import hr.njakopcic.bibliotheca.service.BookService;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,16 @@ public class BookController {
         return new ResponseEntity<>(new ApiResponse(bookService.getAllBooks()), HttpStatus.OK);
     }
 
+    @GetMapping("/genres")
+    public ResponseEntity<ApiResponse> getAllGenres() {
+        return new ResponseEntity<>(new ApiResponse(bookService.getAllGenres()), HttpStatus.OK);
+    }
+
+    @GetMapping("/authors")
+    public ResponseEntity<ApiResponse> getAllAuthors() {
+        return new ResponseEntity<>(new ApiResponse(bookService.getAllAuthors()), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse> getBookById(@PathVariable final Long id) {
         return new ResponseEntity<>(new ApiResponse(bookService.getBookById(id)), HttpStatus.OK);
@@ -36,6 +47,12 @@ public class BookController {
     @Secured("ROLE_ADMIN")
     public ResponseEntity<ApiResponse> createBook(@Valid @RequestBody final CreateBookRequest request) {
         return new ResponseEntity<>(new ApiResponse(bookService.createBook(request)), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/genre")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<ApiResponse> createGenre(@Valid @RequestBody final CreateGenreRequest request) {
+        return new ResponseEntity<>(new ApiResponse(bookService.createGenre(request)), HttpStatus.CREATED);
     }
 
     @PostMapping("/borrow/{bookId}")

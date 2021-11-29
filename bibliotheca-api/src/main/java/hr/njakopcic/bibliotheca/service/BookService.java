@@ -1,20 +1,26 @@
 package hr.njakopcic.bibliotheca.service;
 
 import hr.njakopcic.bibliotheca.dto.request.CreateBookRequest;
+import hr.njakopcic.bibliotheca.dto.request.CreateGenreRequest;
+import hr.njakopcic.bibliotheca.dto.response.AuthorDto;
 import hr.njakopcic.bibliotheca.dto.response.BookDto;
-import hr.njakopcic.bibliotheca.dto.response.BookReservationDto;
+import hr.njakopcic.bibliotheca.dto.response.GenreDto;
+import hr.njakopcic.bibliotheca.dto.response.ReservationDto;
 import hr.njakopcic.bibliotheca.exception.BookAlreadyBorrowedException;
 import hr.njakopcic.bibliotheca.exception.MembershipExpiredException;
 import hr.njakopcic.bibliotheca.exception.NotFoundException;
+import hr.njakopcic.bibliotheca.mapper.AuthorDtoMapper;
 import hr.njakopcic.bibliotheca.mapper.BookDtoMapper;
-import hr.njakopcic.bibliotheca.mapper.BookReservationDtoMapper;
+import hr.njakopcic.bibliotheca.mapper.GenreDtoMapper;
+import hr.njakopcic.bibliotheca.mapper.ReservationDtoMapper;
 import hr.njakopcic.bibliotheca.model.Book;
-import hr.njakopcic.bibliotheca.model.BookReservation;
+import hr.njakopcic.bibliotheca.model.Genre;
+import hr.njakopcic.bibliotheca.model.Reservation;
 import hr.njakopcic.bibliotheca.model.User;
 import hr.njakopcic.bibliotheca.repository.AuthorRepository;
 import hr.njakopcic.bibliotheca.repository.BookRepository;
-import hr.njakopcic.bibliotheca.repository.BookReservationRepository;
 import hr.njakopcic.bibliotheca.repository.GenreRepository;
+import hr.njakopcic.bibliotheca.repository.ReservationRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +34,7 @@ public class BookService {
     private static final int DAYS_TO_RETURN = 14;
 
     private final BookRepository bookRepository;
-    private final BookReservationRepository reservationRepository;
+    private final ReservationRepository reservationRepository;
     private final GenreRepository genreRepository;
     private final AuthorRepository authorRepository;
 
@@ -37,15 +43,27 @@ public class BookService {
 
     public List<BookDto> getAllBooks() {
         return bookRepository.findAll().stream()
-                                       .map(BookDtoMapper::map)
+                                       .map((Book source) -> BookDtoMapper.map(source, reservationRepository.findUnreturnedReservationId(source.getId())))
                                        .collect(Collectors.toList());
+    }
+
+    public List<GenreDto> getAllGenres() {
+        return genreRepository.findAll().stream()
+                                        .map(GenreDtoMapper::map)
+                                        .collect(Collectors.toList());
+    }
+
+    public List<AuthorDto> getAllAuthors() {
+        return authorRepository.findAll().stream()
+                               .map(AuthorDtoMapper::map)
+                               .collect(Collectors.toList());
     }
 
     public BookDto getBookById(Long id) {
         Book book = bookRepository.findById(id)
             .orElseThrow(() -> new NotFoundException(String.format("Book with id %d not found.", id)));
 
-        return BookDtoMapper.map(book);
+        return BookDtoMapper.map(book, reservationRepository.findUnreturnedReservationId(book.getId()));
     }
 
     public BookDto createBook(CreateBookRequest request) {
@@ -60,10 +78,20 @@ public class BookService {
 
         book = bookRepository.save(book);
 
-        return BookDtoMapper.map(book);
+        return BookDtoMapper.map(book, null);
     }
 
-    public BookReservationDto borrowBook(Long bookId) {
+    public GenreDto createGenre(CreateGenreRequest request) {
+        Genre genre = Genre.builder()
+            .name(request.getName())
+            .build();
+
+        genre = genreRepository.save(genre);
+
+        return GenreDtoMapper.map(genre);
+    }
+
+    public ReservationDto borrowBook(Long bookId) {
 
         User currentUser = currentUserService.getLoggedInUser();
 
@@ -81,7 +109,7 @@ public class BookService {
         }
 
         // reserve book
-        BookReservation reservation = BookReservation.builder()
+        Reservation reservation = Reservation.builder()
             .book(book)
             .borrower(currentUser)
             .borrowedDate(LocalDate.now())
@@ -89,11 +117,13 @@ public class BookService {
             .returned(false)
             .build();
 
-        return BookReservationDtoMapper.map(reservation);
+        reservation = reservationRepository.save(reservation);
+
+        return ReservationDtoMapper.map(reservation);
     }
 
     private boolean isBookAvailableToBorrow(Long bookId) {
-        BookReservation latestReservation = reservationRepository.findLatestReservation(bookId);
+        Reservation latestReservation = reservationRepository.findLatestReservation(bookId);
         return latestReservation == null || latestReservation.getReturned();
     }
 }

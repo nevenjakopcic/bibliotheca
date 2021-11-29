@@ -183,7 +183,6 @@ The Great Gatsby is one of the great classics of twentieth-century literature.
 
   <changeSet author="Neven Jakopčić" id="1638034938-4-book-reservations">
     <insert schemaName="public" tableName="book_reservation">
-      <column name="id" value="1"/>
       <column name="book_id" value="1"/>
       <column name="borrower_id" value="2"/>
       <column name="borrowed_date" value="2021-11-25"/>
@@ -191,7 +190,6 @@ The Great Gatsby is one of the great classics of twentieth-century literature.
       <column name="returned" value="true"/>
     </insert>
     <insert schemaName="public" tableName="book_reservation">
-      <column name="id" value="2"/>
       <column name="book_id" value="1"/>
       <column name="borrower_id" value="3"/>
       <column name="borrowed_date" value="2021-11-27"/>
@@ -199,7 +197,6 @@ The Great Gatsby is one of the great classics of twentieth-century literature.
       <column name="returned" value="false"/>
     </insert>
     <insert schemaName="public" tableName="book_reservation">
-      <column name="id" value="3"/>
       <column name="book_id" value="2"/>
       <column name="borrower_id" value="2"/>
       <column name="borrowed_date" value="2021-11-25"/>

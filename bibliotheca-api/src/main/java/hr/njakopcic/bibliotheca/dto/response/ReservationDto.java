@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookReservationDto implements Serializable {
+public class ReservationDto implements Serializable {
 
     private static final long serialVersionUID = 7925006164893345923L;
 
