@@ -12,6 +12,11 @@ export default {
       name
     });
   },
+  async createAuthor(name) {
+    return await axios.post("/book/author", {
+      name
+    });
+  },
   async createBook({ title, genreId, authorId, description }) {
     return await axios.post("/book", {
       title,

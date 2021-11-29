@@ -51,10 +51,11 @@
 <script>
 import UserMixin from "../mixins/userMixin";
 import LoadingMixin from "../mixins/loadingMixin";
+import MembershipMixin from "../mixins/membershipMixin";
 
 export default {
   name: "app-bar",
-  mixins: [UserMixin, LoadingMixin],
+  mixins: [UserMixin, LoadingMixin, MembershipMixin],
   data: () => ({
     appVersion: process.env.PACKAGE_VERSION,
   })

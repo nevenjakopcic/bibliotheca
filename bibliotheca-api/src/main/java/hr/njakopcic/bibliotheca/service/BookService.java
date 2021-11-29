@@ -1,5 +1,6 @@
 package hr.njakopcic.bibliotheca.service;
 
+import hr.njakopcic.bibliotheca.dto.request.CreateAuthorRequest;
 import hr.njakopcic.bibliotheca.dto.request.CreateBookRequest;
 import hr.njakopcic.bibliotheca.dto.request.CreateGenreRequest;
 import hr.njakopcic.bibliotheca.dto.response.AuthorDto;
@@ -13,6 +14,7 @@ import hr.njakopcic.bibliotheca.mapper.AuthorDtoMapper;
 import hr.njakopcic.bibliotheca.mapper.BookDtoMapper;
 import hr.njakopcic.bibliotheca.mapper.GenreDtoMapper;
 import hr.njakopcic.bibliotheca.mapper.ReservationDtoMapper;
+import hr.njakopcic.bibliotheca.model.Author;
 import hr.njakopcic.bibliotheca.model.Book;
 import hr.njakopcic.bibliotheca.model.Genre;
 import hr.njakopcic.bibliotheca.model.Reservation;
@@ -89,6 +91,16 @@ public class BookService {
         genre = genreRepository.save(genre);
 
         return GenreDtoMapper.map(genre);
+    }
+
+    public AuthorDto createAuthor(CreateAuthorRequest request) {
+        Author author = Author.builder()
+            .name(request.getName())
+            .build();
+
+        author = authorRepository.save(author);
+
+        return AuthorDtoMapper.map(author);
     }
 
     public ReservationDto borrowBook(Long bookId) {

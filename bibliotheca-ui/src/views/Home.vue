@@ -41,6 +41,14 @@
           >
             {{ "New genre" }}
           </v-btn>
+          <v-btn
+              color="error"
+              small
+              class="mr-3"
+              @click="newAuthorDialog = true"
+          >
+            {{ "New author" }}
+          </v-btn>
           <v-btn color="success" small @click="newBookDialog = true">
             {{ "New book" }}
           </v-btn>
@@ -147,6 +155,51 @@
     </header-dialog>
     <header-dialog
         max-width="50%"
+        v-model="newAuthorDialog"
+        title="New genre"
+        @close="resetNewAuthorDialog"
+    >
+      <validation-observer ref="newAuthorForm" v-slot="{ handleSubmit }">
+        <form @submit.prevent="handleSubmit(addNewAuthor)">
+          <v-row class="mt-1">
+            <v-col cols="12">
+              <validation-provider
+                  vid="newAuthorName"
+                  name="New author name"
+                  rules="required"
+                  v-slot="{ errors, valid, untouched, required, failed }"
+              >
+                <v-text-field
+                    id="newAuthorName"
+                    v-model="newAuthorName"
+                    :error-messages="errors"
+                    :hide-details="valid || (untouched && !failed)"
+                    dense
+                >
+                  <template #label>
+                    <required-icon v-show="required" />
+                    <span>{{ "New author name" }}</span>
+                  </template>
+                </v-text-field>
+              </validation-provider>
+            </v-col>
+            <v-col cols="12" class="text-center text-md-right mt-2">
+              <v-btn
+                  :loading="dialogLoading"
+                  :disabled="dialogLoading"
+                  small
+                  type="submit"
+                  color="primary"
+              >
+                {{ "Create" }}
+              </v-btn>
+            </v-col>
+          </v-row>
+        </form>
+      </validation-observer>
+    </header-dialog>
+    <header-dialog
+        max-width="50%"
         v-model="newBookDialog"
         title="New book"
         @close="resetNewBookDialog"
@@ -154,6 +207,27 @@
       <validation-observer ref="newBookForm" v-slot="{ handleSubmit }">
         <form @submit.prevent="handleSubmit(addNewBook)">
           <v-row class="mt-1">
+            <v-col cols="12">
+              <validation-provider
+                  vid="newBookName"
+                  name="Book title"
+                  rules="required"
+                  v-slot="{ errors, valid, untouched, required, failed }"
+              >
+                <v-text-field
+                    id="newBookName"
+                    v-model="newBook.title"
+                    :error-messages="errors"
+                    :hide-details="valid || (untouched && !failed)"
+                    dense
+                >
+                  <template #label>
+                    <required-icon v-show="required" />
+                    <span>{{ "Book title" }}</span>
+                  </template>
+                </v-text-field>
+              </validation-provider>
+            </v-col>
             <v-col cols="12">
               <validation-provider
                   vid="newGenre"
@@ -170,7 +244,7 @@
                     item-value="id"
                     :return-object="false"
                     :items="genres"
-                    v-model="newBook.type"
+                    v-model="newBook.genre"
                     clearable
                 >
                   <template #label>
@@ -182,23 +256,49 @@
             </v-col>
             <v-col cols="12">
               <validation-provider
-                  vid="newBookName"
-                  name="Book title"
+                  vid="newAuthor"
+                  name="Author"
                   rules="required"
                   v-slot="{ errors, valid, untouched, required, failed }"
               >
-                <v-text-field
-                    id="newBookName"
-                    v-model="newBook.name"
+                <v-select
+                    id="newAuthor"
+                    :error-messages="errors"
+                    :hide-details="valid || (untouched && !failed)"
+                    dense
+                    item-text="name"
+                    item-value="id"
+                    :return-object="false"
+                    :items="authors"
+                    v-model="newBook.author"
+                    clearable
+                >
+                  <template #label>
+                    <required-icon v-show="required" />
+                    <span>{{ "Author" }}</span>
+                  </template>
+                </v-select>
+              </validation-provider>
+            </v-col>
+            <v-col cols="12">
+              <validation-provider
+                  vid="newBookDescription"
+                  name="Book description"
+                  rules="required"
+                  v-slot="{ errors, valid, untouched, required, failed }"
+              >
+                <v-textarea
+                    id="newBookDescription"
+                    v-model="newBook.description"
                     :error-messages="errors"
                     :hide-details="valid || (untouched && !failed)"
                     dense
                 >
                   <template #label>
                     <required-icon v-show="required" />
-                    <span>{{ "Book title" }}</span>
+                    <span>{{ "Book description" }}</span>
                   </template>
-                </v-text-field>
+                </v-textarea>
               </validation-provider>
             </v-col>
             <v-col cols="12" class="text-center text-md-right mt-2">
@@ -364,6 +464,25 @@ export default {
         this.resetNewGenreDialog();
       }
     },
+    async addNewAuthor() {
+      try {
+        this.dialogLoading = true;
+        await BookService.createAuthor(this.newAuthorName);
+        this.$emit("show-snackbar", {
+          color: "success",
+          message: "Author created"
+        });
+      } catch(e) {
+        this.$emit("show-snackbar", {
+          color: "error",
+          message: "Author creation failed"
+        });
+      } finally {
+        this.dialogLoading = false;
+        await this.getAuthors();
+        this.resetNewAuthorDialog();
+      }
+    },
     resetNewBookDialog() {
       this.newBook.type = null;
       this.newBook.name = null;
@@ -375,6 +494,12 @@ export default {
       this.$refs.newGenreForm.reset();
       this.getGenres();
       this.newGenreDialog = false;
+    },
+    resetNewAuthorDialog() {
+      this.newAuthorName = null;
+      this.$refs.newAuthorForm.reset();
+      this.getAuthors();
+      this.newAuthorsDialog = false;
     }
   },
   data: () => ({

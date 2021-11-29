@@ -10,7 +10,9 @@ public class UserDtoMapper {
             .id(source.getId())
             .username(source.getUsername())
             .email(source.getEmail())
-            .role(source.getRole().ordinal()).build();
+            .role(source.getRole().ordinal())
+            .membership(MembershipDtoMapper.map(source.getMembership()))
+            .build();
     }
 
     private UserDtoMapper() {}

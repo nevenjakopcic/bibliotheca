@@ -112,7 +112,7 @@
       </v-card-text>
     </v-card>
     <span class="mt-4 text-subtitle-2">
-      {{ "Already have an account?" }}? {{ "Login " }}
+      {{ "Already have an account?" }} {{ "Login " }}
       <router-link :to="{ name: RouteNames.LOGIN }">
         {{ "here." }}
       </router-link>

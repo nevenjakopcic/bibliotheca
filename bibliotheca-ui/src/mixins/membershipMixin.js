@@ -2,9 +2,9 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["memberships", "validMembership"])
+    ...mapGetters(["membership", "validMembership"])
   },
   methods: {
-    ...mapActions(["setMemberships"])
+    ...mapActions(["setMembership"])
   }
 }

@@ -1,6 +1,7 @@
 package hr.njakopcic.bibliotheca.controller;
 
 import hr.njakopcic.bibliotheca.dto.ApiResponse;
+import hr.njakopcic.bibliotheca.dto.request.CreateAuthorRequest;
 import hr.njakopcic.bibliotheca.dto.request.CreateBookRequest;
 import hr.njakopcic.bibliotheca.dto.request.CreateGenreRequest;
 import hr.njakopcic.bibliotheca.service.BookService;
@@ -55,6 +56,12 @@ public class BookController {
     @Secured("ROLE_ADMIN")
     public ResponseEntity<ApiResponse> createGenre(@Valid @RequestBody final CreateGenreRequest request) {
         return new ResponseEntity<>(new ApiResponse(bookService.createGenre(request)), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/author")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<ApiResponse> createAuthor(@Valid @RequestBody final CreateAuthorRequest request) {
+        return new ResponseEntity<>(new ApiResponse(bookService.createAuthor(request)), HttpStatus.CREATED);
     }
 
     @PostMapping("/borrow/{bookId}")

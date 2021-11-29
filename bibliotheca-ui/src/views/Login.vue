@@ -16,7 +16,7 @@
           </v-list-item-content>
         </v-list-item>
       </div>
-      <v-divider />
+      <v-divider/>
       <v-card-text class="pt-5">
         <validation-observer v-slot="{ handleSubmit }">
           <form @submit.prevent="handleSubmit(login)">
@@ -37,7 +37,7 @@
                       dense
                   >
                     <template #label>
-                      <required-icon v-show="required" />
+                      <required-icon v-show="required"/>
                       <span>Username</span>
                     </template>
                   </v-text-field>
@@ -60,7 +60,7 @@
                       dense
                   >
                     <template #label>
-                      <required-icon v-show="required" />
+                      <required-icon v-show="required"/>
                       <span>{{ "Password" }}</span>
                     </template>
                     <template #append>
@@ -90,7 +90,7 @@
       </v-card-text>
     </v-card>
     <span class="mt-4 text-subtitle-2">
-      {{ "Don't have an account?" }}? {{ "Register " }}
+      {{ "Don't have an account?" }} {{ "Register " }}
       <router-link :to="{ name: RouteNames.REGISTER }">
         {{ "here." }}
       </router-link>
@@ -100,8 +100,10 @@
 
 <script>
 import AuthService from "../services/authService";
-import { mapActions } from "vuex";
+import MembershipService from "../services/membershipService";
+import {mapActions} from "vuex";
 import RouteNames from "../router/routeNames";
+import {AUTH_ROLE} from "@/constants/enumerations";
 
 export default {
   name: "Login",
@@ -131,13 +133,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["setUser"]),
+    ...mapActions(["setUser", "setMembership"]),
     async login() {
-      try {
       this.loading = true;
       const response = await AuthService.login(this.username, this.password);
       if (response.status >= 400) {
-        const { data } = response;
+        const {data} = response;
         this.$emit("show-snackbar", {
           color: "error",
           message: data.error
@@ -145,7 +146,7 @@ export default {
         this.loading = false;
       } else {
         const {
-          data: { data }
+          data: {data}
         } = response;
 
         this.setUser({
@@ -156,18 +157,29 @@ export default {
           role: data.role
         });
 
+        if (data.role === AUTH_ROLE.ROLE_USER) {
+          const responseMembership = await MembershipService.getMembershipOfUser(data.id);
+
+          if (responseMembership.status >= 400) {
+            this.setMembership(null);
+          } else {
+            const {
+              data: {data}
+            } = responseMembership;
+            this.setMembership(data);
+          }
+        } else {
+          this.setMembership(null);
+        }
+
         this.$emit("show-snackbar", {
           color: "success",
           message: "You have logged in successfully"
         });
 
-        this.$router.push({ name: "home" });
+        this.$router.push({name: "home"});
       }
-    } catch (e) {
-        console.log(e);
-      } finally {
-        this.loading = false;
-      }
+      this.loading = false;
     }
   }
 };

@@ -1,37 +1,35 @@
 import { isBefore } from "date-fns";
 import { AUTH_ROLE } from "@/constants/enumerations";
-import { add } from "date-fns";
 import store from "../../index";
 
 export default {
   state: {
-    memberships: []
+    membership: null
   },
   mutations: {
-    setMemberships(state, payload) {
-      state.memberships = payload;
+    setMembership(state, payload) {
+      state.membership = payload;
     }
   },
   actions: {
-    setMemberships({ commit }, payload) {
-      commit("setMemberships", payload);
+    setMembership({ commit }, payload) {
+      commit("setMembership", payload);
     }
   },
   getters: {
-    memberships: state => state.memberships,
-    validMembership: () => {
-      // if (store.getters.user.role === AUTH_ROLE.ROLE_ADMIN) {
-      //   return true;
-      // } else {
-      //   if (state.memberships && state.memberships.length !== 0) {
-      //     return isBefore(
-      //       new Date(),
-      //       add(new Date(), { months: 1 })
-      //     );
-      //   }
-      //   return false;
-      // }
-      return true;
+    membership: state => state.membership,
+    validMembership: state => {
+      if (store.getters.user.role === AUTH_ROLE.ROLE_ADMIN) {
+        return true;
+      } else {
+        if (state.membership) {
+          return isBefore(
+            new Date(),
+            new Date(state.membership.validUntil)
+          );
+        }
+        return false;
+      }
     }
   },
 }
