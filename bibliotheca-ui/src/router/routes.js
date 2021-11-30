@@ -3,6 +3,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Book from '../views/Book.vue'
 import routeNames from "./routeNames";
+import Memberships from "@/views/Memberships";
 
 const routes = [
 	{
@@ -27,6 +28,14 @@ const routes = [
 		component: Login,
 		meta: {
 			guest: true
+		}
+	},
+	{
+		path: '/memberships',
+		name: routeNames.MEMBERSHIPS,
+		component: Memberships,
+		meta: {
+			requiresAuth: true
 		}
 	},
 	{
