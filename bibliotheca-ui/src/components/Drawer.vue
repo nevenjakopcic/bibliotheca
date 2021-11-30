@@ -94,6 +94,11 @@ export default {
           text: "Home",
           icon: "mdi-home",
           route: { name: RouteNames.HOME }
+        },
+        {
+          text: "Memberships",
+          icon: "mdi-account-multiple",
+          route: { name: RouteNames.MEMBERSHIPS }
         }
       ];
 

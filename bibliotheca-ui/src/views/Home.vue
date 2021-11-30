@@ -57,12 +57,12 @@
     </v-col>
     <v-col cols="12" class="text-center text-h5" v-if="books.length === 0 && !loading">
       <v-icon color="red" class="mr-2">mdi-alert</v-icon>
-      {{ "No records found" }}
+      {{ "No books found" }}
     </v-col>
     <template v-else v-for="b in books">
       <v-col cols="12" md="3" :key="b.id">
         <v-card rounded="lg">
-          <v-card-title>
+          <v-card-title @click="viewBook(b.id)" class="clickable">
             {{ b.title }}
             <span class="grey--text text--darken-1 text-caption ml-1">
               ({{ b.genre.name }})
@@ -319,6 +319,12 @@
   </v-row>
 </template>
 
+<style scoped>
+.clickable {
+  cursor: pointer;
+}
+</style>
+
 <script>
 import debounce from "debounce";
 import UserMixin from "../mixins/userMixin";
@@ -329,7 +335,7 @@ import routeNames from "../router/routeNames";
 import BookService from "../services/bookService";
 
 export default {
-  name: "Book",
+  name: "Home",
   mixins: [UserMixin, MembershipMixin, LoadingMixin],
   components: {
     HeaderDialog
@@ -500,6 +506,9 @@ export default {
       this.$refs.newAuthorForm.reset();
       this.getAuthors();
       this.newAuthorsDialog = false;
+    },
+    viewBook(id) {
+      this.$router.push({ name: routeNames.BOOK, params: { id } })
     }
   },
   data: () => ({

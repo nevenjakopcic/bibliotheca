@@ -41,5 +41,8 @@ export default {
         genre
       }
     });
+  },
+  async getBook(id) {
+    return await axios.get(`/book/${id}`)
   }
 };

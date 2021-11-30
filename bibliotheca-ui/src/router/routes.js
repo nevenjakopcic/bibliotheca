@@ -1,6 +1,7 @@
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import Book from '../views/Book.vue'
 import routeNames from "./routeNames";
 
 const routes = [
@@ -8,6 +9,14 @@ const routes = [
 		path: '/',
 		name: routeNames.HOME,
 		component: Home,
+		meta: {
+			requiresAuth: true
+		}
+	},
+	{
+		path: '/book/:id',
+		name: routeNames.BOOK,
+		component: Book,
 		meta: {
 			requiresAuth: true
 		}
