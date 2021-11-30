@@ -7,9 +7,7 @@
       @input="inputChanged"
   >
     <v-list class="py-0">
-      <v-list-item
-          :to="{ name: RouteNames.USER_PROFILE, params: { id: user.id } }"
-      >
+      <v-list-item>
         <v-avatar size="40" color="primary" class="mr-3">
           <span class="white--text">{{ initials(user.username) }}</span>
         </v-avatar>
@@ -94,13 +92,16 @@ export default {
           text: "Home",
           icon: "mdi-home",
           route: { name: RouteNames.HOME }
-        },
-        {
+        }
+      ];
+
+      if (this.isAdmin) {
+        res.push({
           text: "Memberships",
           icon: "mdi-account-multiple",
           route: { name: RouteNames.MEMBERSHIPS }
-        }
-      ];
+        });
+      }
 
       return res;
     }
