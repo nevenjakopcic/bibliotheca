@@ -1,6 +1,5 @@
 package hr.njakopcic.bibliotheca.dto.request;
 
-import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

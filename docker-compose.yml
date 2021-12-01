@@ -17,7 +17,6 @@ services:
   bibliotheca-api:
     build:
       context: ./bibliotheca-api
-#      target: bibliotheca
     image: njakopcic/bibliotheca
     container_name: bibliotheca-api
     ports:
